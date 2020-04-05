@@ -54,7 +54,7 @@ public class less20 {
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 60);
         webDriverWait.until(ExpectedConditions.invisibilityOf(reviewPage.nameReview(1)));
         String nameReview = reviewPage.nameReview(1).getText();
-        nameReview = nameReview.replaceAll("[^(\\а-яёА-ЯЁ)]", "");
+        nameReview = nameReview.replaceAll("[^(а-яёА-ЯЁ)]", "");
         Assert.assertEquals(nameReview, "Обзор");
         Assert.assertEquals(reviewPage.financialfreedom(1).getText(), "Финансовая свобода");
         String sumMony = reviewPage.webColumnMoney().getText().trim();
@@ -67,7 +67,7 @@ public class less20 {
         action.moveToElement(reviewPage.webColumnMoney()).build().perform();
 
         String myMoney = reviewPage.webColumnMyMoney().getText();
-        myMoney = myMoney.replaceAll("[^(\\а-яёА-ЯЁ)]", "").trim();
+        myMoney = myMoney.replaceAll("[^(а-яёА-ЯЁ), ]", "").trim();
         Assert.assertEquals(myMoney, "Моих средств");
         String mySumMony = reviewPage.webColumnMyMoney().getText().replaceAll("Моих средств", "").trim();
         LOGG.info(mySumMony);
