@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class CodePage {
     private final WebDriver webDriver;
     private final By addCode = By.id("otp-code");
-    private final By entrButtonCode = By.id("login-otp-button");
+    private final By enterButtonCode = By.id("login-otp-button");
 
     public CodePage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -17,7 +17,7 @@ public class CodePage {
         webDriver.findElement(addCode).sendKeys(code);
     }
 
-    public void clickEntrButton() {
-        webDriver.findElement(entrButtonCode).click();
+    public void clickEnterButton() {
+        webDriver.findElement(enterButtonCode).click();
     }
 }

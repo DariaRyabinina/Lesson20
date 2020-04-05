@@ -45,7 +45,7 @@ public class less20 {
 
         CodePage codePage = new CodePage(webDriver);
         codePage.enterCode("0000");
-        codePage.clickEntrButton();
+        codePage.clickEnterButton();
 
         TabMenu tabMenu = new TabMenu(webDriver);
         tabMenu.clickButtonId("bank-overview");
