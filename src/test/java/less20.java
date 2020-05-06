@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
 public class less20 {
     private WebDriver webDriver;
     public static final Logger LOGG = LoggerFactory.getLogger(less20.class);
+    private static final String formatManey="\\d{0,3}\\s\\d{0,3}\\s\\d{0,3}\\.\\d{2}\\s.";
 
     @BeforeClass
     public void downloadDriverManager() {
@@ -36,7 +37,8 @@ public class less20 {
       }
 
     @Test
-    public void Test1() {
+    public void TestSpbBank() {
+
         webDriver.get("https://idemo.bspb.ru/");
         webDriver.manage().window().maximize();
 
@@ -55,12 +57,12 @@ public class less20 {
         webDriverWait.until(ExpectedConditions.invisibilityOf(reviewPage.nameReview(1)));
         String nameReview = reviewPage.nameReview(1).getText();
         nameReview = nameReview.replaceAll("[^(а-яёА-ЯЁ)]", "");
-        Assert.assertEquals(nameReview, "Обзор");
-        Assert.assertEquals(reviewPage.financialfreedom(1).getText(), "Финансовая свобода");
+        Assert.assertEquals(nameReview, "Обзор","Название вкладки не Обзор");
+        Assert.assertEquals(reviewPage.financialFreedom(1).getText(), "Финансовая свобода", "Название поля не \"Финансовая свобода\"");
         String sumMony = reviewPage.webColumnMoney().getText().trim();
-        LOGG.info(sumMony);
-        boolean mach = sumMony.matches("\\d{0,3}\\s\\d{0,3}\\s\\d{0,3}\\.\\d{2}\\s.");
-        Assert.assertTrue(mach);
+        LOGG.info("Указанная сумма %e",sumMony);
+        boolean mach = sumMony.matches(formatManey);
+        Assert.assertTrue(mach,"Формат не соответствует");
 
 
         Actions action = new Actions(webDriver);
@@ -68,11 +70,11 @@ public class less20 {
 
         String myMoney = reviewPage.webColumnMyMoney().getText();
         myMoney = myMoney.replaceAll("[^(а-яёА-ЯЁ), ]", "").trim();
-        Assert.assertEquals(myMoney, "Моих средств");
+        Assert.assertEquals(myMoney, "Моих средств", "Название поля не \"Моих средств\"");
         String mySumMony = reviewPage.webColumnMyMoney().getText().replaceAll("Моих средств", "").trim();
-        LOGG.info(mySumMony);
-        mach = mySumMony.matches("\\d{0,3}\\s\\d{0,3}\\s\\d{0,3}\\.\\d{2}\\s.");
-        Assert.assertTrue(mach);
+        LOGG.info("Сумма моих средств %e",mySumMony);
+        mach = mySumMony.matches(formatManey);
+        Assert.assertTrue(mach, "Формат не соответствует");
 
 
     }

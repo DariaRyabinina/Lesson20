@@ -22,7 +22,7 @@ public class ReviewPage {
 
     }
 
-    public WebElement financialfreedom(int i) {
+    public WebElement financialFreedom(int i) {
         return webDriver.findElement(By.xpath("//@id[.='can-spend'][1]/following::span[" + i + "]"));
     }
 
